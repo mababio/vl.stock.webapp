@@ -25,9 +25,10 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
+	<groupId>org.springframework.data</groupId>
+	<artifactId>spring-data-mongodb</artifactId>
+	</dependency>
+
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-spring-boot-starter</artifactId>
@@ -39,6 +40,28 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+		<groupId>itextpdf</groupId>
+		<artifactId>itextpdf</artifactId>
+		<version>5.5.3</version>
+	</dependency>
+	<dependency>
+		<groupId>itextpdfa</groupId>
+		<artifactId>itextpdfa</artifactId>
+		<version>5.5.3</version>
+	</dependency>
+	<dependency>
+		<groupId>itextxra</groupId>
+		<artifactId>itextxra</artifactId>
+		<version>5.5.3</version>
+	</dependency>
+		<dependency>
+	<groupId>commons-lang</groupId>
+	<artifactId>commons-lang</artifactId>
+	<version>2.6</version>
+</dependency>
+		
+		
 	</dependencies>
 	
 	<dependencyManagement>
