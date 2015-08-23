@@ -4,6 +4,7 @@
 package org.mababio.spring.vltool;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 
 import junit.framework.TestCase;
 
@@ -12,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mababio.config.StockWebAppApplication;
 import org.mababio.spring.vltool.domain.Stock;
 import org.mababio.spring.vltool.extractor.StocksPdfExtractor;
 import org.mababio.spring.vltool.repository.StockRepo;
@@ -56,6 +58,17 @@ public class VLDomainTest extends TestCase {
 		StocksPdfExtractor pdfEx=new StocksPdfExtractor();
 		LinkedHashSet<Stock> vlStockSet=pdfEx.getPdfValueLines(); 
 		service.save(vlStockSet);
+	}
+
+
+
+	@Test
+	public void  testRepo(){
+
+		List<Stock> list = service.findByStkName("Goodrich Petroleum");
+
+		System.out.println("List:  ---> "+list);
+
 	}
 	
 

@@ -27,11 +27,14 @@ import org.mababio.spring.vltool.utils.VLineUtils;
 import com.itextpdf.text.pdf.parser.PdfReaderContentParser;
 import com.itextpdf.text.pdf.parser.SimpleTextExtractionStrategy;
 import com.itextpdf.text.pdf.parser.TextExtractionStrategy;
+//import org.apache.commons.lang3.RandomStringUtils.*;
+
+
 
 
 public class StocksPdfExtractor {
 	//where the pdf lives// make sure you change it!!!!!
-	public static final String FOLDER = "C:/VL/VLpdf";
+	public static final String FOLDER =    "/home/ea/IdeaProjects/vl.stock.webapp/vl.stock.webapp/src/main/resources/VL/VLpdf";  /*"C:/VL/VLpdf";*/
 	//private static org.mababio.spring.vltool.pdf.extractor.ValueLinePdfManager pdfMngr;
 	static final String LOG_PROPERTIES_FILE = "src/log4j/log4j.properties";
 	private static Logger iLOG = Logger.getLogger(StocksPdfExtractor.class);
@@ -120,7 +123,12 @@ public class StocksPdfExtractor {
 		DateToken dtk=VLineUtils.getDateToken(VLMap.get(2));//Generate DateToken from Line
 		
 		Calendar cal=VLineUtils.getVLCalendar(dtk);
-		vaLine.setVlineDate(DatabaseUtility.convertCalendarToSQLDate(cal));
+
+
+		/*Mongdb doesn't seem to support java.sql.date*/
+		/*  code for sql date --> DatabaseUtility.convertCalendarToSQLDate(cal)*/
+
+				vaLine.setVlineDate(cal.getTime());
 		
 		  
 		 Collection<String> allStks= VLMap.values();

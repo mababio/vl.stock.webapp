@@ -17,15 +17,15 @@ public class ValueLine implements Serializable {
 	private static final long serialVersionUID = 234292435074726920L;
 	
 	
-	@Id
-	private java.sql.Date vlineDate;
+
+	private java.util.Date vlineDate;
 	
 	
-	public java.sql.Date getVlineDate() {
+	public java.util.Date getVlineDate() {
 		return vlineDate;
 	}
 
-	public void setVlineDate(java.sql.Date vlineDate) {
+	public void setVlineDate(java.util.Date vlineDate) {
 		this.vlineDate = vlineDate;
 	}
 

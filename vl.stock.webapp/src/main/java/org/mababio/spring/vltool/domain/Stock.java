@@ -41,8 +41,10 @@ public class Stock implements Serializable {
 		return stkName;
 	}
 
-	public void setStkName(String stkName) {
+	public Stock  setStkName(String stkName) {
 		this.stkName = stkName;
+
+		return this;
 	}
 
 	public void setStkName(String stkname, Function<String,String> function){
