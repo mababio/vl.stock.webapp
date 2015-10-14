@@ -141,7 +141,7 @@ public class Stock implements Serializable {
 
 
 
-
+k
 	
 	
 }
