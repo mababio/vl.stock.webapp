@@ -7,16 +7,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
@@ -39,7 +30,7 @@ public class VLineUtils {
 	 
 	public static DateToken getDateToken(String inpLine) {
 		String date=inpLine.substring(0, inpLine.indexOf("SUMMARY"));
-		System.out.println("date = "+date);
+		System.out.println("date = " + date);
 		Scanner scnr=new Scanner(date);
 		DateToken dtk=new DateToken();
 		int i=0;
@@ -97,25 +88,10 @@ public class VLineUtils {
 	public static int getWeekNumber(DateToken dtk){
 		int weekNum=-1;
 		int yearForDate=Integer.valueOf(dtk.getThirdToken());
-		int monthForDate=getMonthAsInt(dtk.getFirstToken(), dtk.getThirdToken(),dtk.getSecondToken());
+		int monthForDate=getMonthAsInt(dtk.getFirstToken(), dtk.getThirdToken(), dtk.getSecondToken());
 		int dayForDate=Integer.valueOf(dtk.getSecondToken());
 		System.out.println("yearForDate="+yearForDate+" monthForDate "+monthForDate+" dayForDate "+dayForDate);
-		//System.out.println( " yearForDate : " + yearForDate+" monthForDate "+monthForDate +" dayForDate "+dayForDate);
-		/*DateTime currentDate = new DateTime( yearForDate, monthForDate, dayForDate, 0, 0, 0, 0 );
-		DateTime endDate = new DateTime( yearForDate, 12, 31, 0, 0, 0, 0 );//--Referenced Date
-		Period weekPeriod = new Period().withWeeks(4);
-		Interval i = new Interval( currentDate, weekPeriod );
-		while( currentDate.getDayOfWeek() != DateTimeConstants.MONDAY ){
-			currentDate = currentDate.plusDays(1);
-		}
-		if( i.getStart().isBefore( endDate ) ){
-			weekNum=i.getStart().getWeekOfWeekyear();
-		    System.out.println( "week : " + weekNum);
-		       //     + " start: " + df.format( i.getStart().toDate() )
-		     //       + " ending: " + df.format( i.getEnd().minusMillis(1).toDate() ) );
-		   // i = new Interval( i.getStart().plus( weekPeriod), weekPeriod );
-		    iLOG.debug( "week : --> " + weekNum);
-		}*/
+
 		Calendar cal = Calendar.getInstance();
 	    cal.set(Calendar.YEAR, yearForDate);
 	    cal.set(Calendar.MONTH, monthForDate);
@@ -147,7 +123,7 @@ public class VLineUtils {
 	 */
 	public static Calendar getVLCalendar(DateToken dtk){
 		int yearForDate=Integer.valueOf(dtk.getThirdToken());
-		int monthForDate=getMonthAsInt(dtk.getFirstToken(), dtk.getThirdToken(),dtk.getSecondToken());
+		int monthForDate=getMonthAsInt(dtk.getFirstToken(), dtk.getThirdToken(), dtk.getSecondToken());
 		int dayForDate=Integer.valueOf(dtk.getSecondToken());
 		Calendar cal = Calendar.getInstance();
 	    cal.set(Calendar.YEAR, yearForDate);
@@ -157,7 +133,7 @@ public class VLineUtils {
 	}
 	
 	/**
-	 * @param dtk
+	 * @param cal
 	 * @return
 	 */
 	public static DateToken getDTKFromCalendar(Calendar cal){
@@ -197,36 +173,85 @@ public class VLineUtils {
 		iLOG.info( " <<<< monthNumber : " + monthNumber);*/
 		return monthNumber;
 	}
-	
+
+
+
+
+
+/*
+
+	private static Boolean isStockName(){}
+
+
+
+
+	private static   Boolean isTicker(String token){
+
+	}
+*/
+
+
+	private static Boolean isVlinePrice(String token){
+		return (Character.isDigit(token.charAt(0))||token.charAt(0)=='-' && doublePattern.matcher(token).matches() )? true : false;
+	}
+
+/*
+	private static  Boolean isVlinePercentage(){}
+	private static  Boolean isRefRank(){}
+	private static  Boolean isTechRank(){}
+	private static  Boolean isSafteyRank(){}
+	private static  Boolean ischnageInPrice(){}
+	private static  Boolean isWorsrt(){}
+	private static  Boolean isBest(){}*/
+
+
+
+
+
+
+
+    public static Stock getValueLineStock(String stckLine,DateToken dtk){
+
+
+
+
+
+
+
+        return  new Stock();
+    }
+
+
 	/**
-	 * @param stckLine
-	 * @param dtk
+	 * @param /stckLine
+//	 * @param /dtk
 	 * @return Stock Entity from one pdf line.
 	 */
 	@SuppressWarnings("unused")
-	public static Stock getValueLineStock(String stckLine,DateToken dtk){
+	/*public static Stock getValueLineStock(String stckLine,DateToken dtk){
 		
-		Scanner scnr=new Scanner(stckLine);
+		Scanner stockRawSringScanner=new Scanner(stckLine);
 		StringBuffer buffer=new StringBuffer();
+
 		 String SPECIAL_CHARACTER = "-"; // And others
 		 String SPECIAL_END="%";
 		int i=0;
 		
 		List<String> myList=new ArrayList<String>();
 		Stock stock=new Stock();
-		while(scnr.hasNext()){
-			String newtk=scnr.next();
-			newtk=StringUtils.trim(newtk);
+		while(stockRawSringScanner.hasNext()){
+			String newtoken=stockRawSringScanner.next();
+			newtoken=StringUtils.trim(newtoken);
 			i++;
-			if(Character.isDigit(newtk.charAt(0))||newtk.charAt(0)=='-'){
-				if(doublePattern.matcher(newtk).matches()){//recent price
-					stock.setVlinePrice(new BigDecimal(newtk));
-				}else if(StringUtils.endsWithIgnoreCase(newtk, SPECIAL_END)){//percent change
-					newtk=StringUtils.remove(newtk, SPECIAL_END);
-					stock.setVlinePercentage(new BigDecimal(newtk));
+			if(Character.isDigit(newtoken.charAt(0))||newtoken.charAt(0)=='-'){
+				if(doublePattern.matcher(newtoken).matches()){//recent price
+					stock.setVlinePrice(new BigDecimal(newtoken));
+				}else if(StringUtils.endsWithIgnoreCase(newtoken, SPECIAL_END)){//percent change
+					newtoken=StringUtils.remove(newtoken, SPECIAL_END);
+					stock.setVlinePercentage(new BigDecimal(newtoken));
 				}
-			}else if(!StringUtils.startsWithIgnoreCase(newtk, SPECIAL_CHARACTER)&&!StringUtils.startsWithIgnoreCase(newtk, "*")){
-				myList.add(newtk);
+			}else if(!StringUtils.startsWithIgnoreCase(newtoken, SPECIAL_CHARACTER)&&!StringUtils.startsWithIgnoreCase(newtoken, "*")){
+				myList.add(newtoken);
 			}
 		
 		}//end of while
@@ -240,7 +265,7 @@ public class VLineUtils {
 		 stock.setStkName(buffer.toString(), s->s.trim());
 		return stock;
 	}
-	
+	*/
 	/**
 	 * @param emf
 	 * @param kemf
@@ -279,11 +304,11 @@ public class VLineUtils {
 	public static LinkedHashSet<Date> getDatesFromStock(Collection stcks){
 		LinkedHashSet<Date> dateSet=new LinkedHashSet<Date>();
 		Iterator<Stock> dtItrx=stcks.iterator();
-		while(dtItrx.hasNext()){
+		/*while(dtItrx.hasNext()){
 			// java.sql.Timestamp stmp=dtItrx.next().getOccurSinceDate();
 				//Date utilDate= DatabaseUtility.convertTimestampToUtilDate(stmp);
 				//dateSet.add(utilDate);	
-		}
+		}*/
 		return dateSet;
 	}
 	

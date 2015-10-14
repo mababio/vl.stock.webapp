@@ -6,7 +6,7 @@ package org.mababio.spring.vltool.domain;
 import java.io.Serializable;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
-import org.springframework.data.annotation.Id;
+
 
 
 

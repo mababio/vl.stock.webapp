@@ -38,7 +38,7 @@ public class DateUtil {
 	private static final String MONTH = "MONTH";
 	private static final String YEAR = "YEAR";
 	private static final String WEEK = "WEEK";
-	private static String DATE_CONST="0.0-0000";
+	private static final String DATE_CONST="0.0-0000";
 	/**
 	 * Clears the time fields from the date.
 	 * @param date the date to clear.
@@ -390,7 +390,7 @@ public class DateUtil {
 	 */
 	public static Timestamp getCurrentTimestamp()
 	{
-		java.sql.Timestamp currtime = null;
+		java.sql.Timestamp currtime;
 		java.util.GregorianCalendar cal = new java.util.GregorianCalendar();
 		int month = cal.get(java.util.Calendar.MONTH);
 		month = month + 1;
@@ -462,7 +462,7 @@ public class DateUtil {
 		String unit,
 		String format)
 	{
-		long ldate = 0;
+		long ldate;
 
 		if (format == null)
 			ldate = stringToLongDate(dateStr, DEFAULT_DATE_FORMAT);
@@ -578,7 +578,7 @@ public class DateUtil {
 		String format)
 	{
 
-		boolean isTrue = false;
+		boolean isTrue;
 
 		try
 		{
@@ -638,7 +638,7 @@ public class DateUtil {
 		String date2,
 		String format)
 	{
-		String fmt = null;
+		String fmt;
 		if (format == null)
 			fmt = DEFAULT_TIMESTAMP_FORMAT;
 		else
@@ -717,7 +717,7 @@ public class DateUtil {
 		String format,
 		boolean rounded)
 	{
-		String fmt = null;
+		String fmt;
 		if (format == null)
 			fmt = DEFAULT_TIMESTAMP_FORMAT;
 		else
@@ -761,7 +761,7 @@ public class DateUtil {
 		String date2,
 		String format)
 	{
-		String fmt = null;
+		String fmt;
 		if (format == null)
 			fmt = DEFAULT_TIMESTAMP_FORMAT;
 		else
@@ -840,7 +840,7 @@ public class DateUtil {
 	public static long getDays(String date1, String date2, String format)
 	{
 		long elapsed = 0;
-		String fmt = null;
+		String fmt;
 		if (format == null)
 			fmt = DEFAULT_DATE_FORMAT;
 		else
@@ -876,7 +876,7 @@ public class DateUtil {
 	public static long getMonths(String date1, String date2, String format)
 	{
 		long elapsed = 0;
-		String fmt = null;
+		String fmt;
 		if (format == null)
 			fmt = DEFAULT_DATE_FORMAT;
 		else

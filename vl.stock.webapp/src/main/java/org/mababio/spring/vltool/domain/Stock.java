@@ -18,13 +18,64 @@ public class Stock implements Serializable {
 	
 	/*The primary key for this Mongo Document is a composite key -> vl.dakeToken + stkName*/
 	@Id
-	private String vl_DateToken_stkName; 
+	private String vl_DateToken_stkName;
+	private ValueLine valueLine;
 	private String stkName;
-	private String Ticker;
+	private String ticker;
 	private BigDecimal vlinePrice;
-	
 	private BigDecimal vlinePercentage;
-	
+	/*new fields that were extracted*/
+	private  Integer pageNumber;
+	private   Double changeInPrice;
+	private   Integer perRank;
+	private   Integer techRank;
+	private   Integer safetyRank;
+
+
+
+
+	/*Getter and Setter*/
+
+	public Integer getPageNumber() {
+		return pageNumber;
+	}
+
+	public void setPageNumber(Integer pageNumber) {
+		this.pageNumber = pageNumber;
+	}
+
+	public Double getChangeInPrice() {
+		return changeInPrice;
+	}
+
+	public void setChangeInPrice(Double changeInPrice) {
+		this.changeInPrice = changeInPrice;
+	}
+
+	public Integer getPerRank() {
+		return perRank;
+	}
+
+	public void setPerRank(Integer perRank) {
+		this.perRank = perRank;
+	}
+
+	public Integer getTechRank() {
+		return techRank;
+	}
+
+	public void setTechRank(Integer techRank) {
+		this.techRank = techRank;
+	}
+
+	public Integer getSafetyRank() {
+		return safetyRank;
+	}
+
+	public void setSafetyRank(Integer safetyRank) {
+		this.safetyRank = safetyRank;
+	}
+
 	public BigDecimal getVlinePercentage() {
 		return vlinePercentage;
 	}
@@ -33,7 +84,8 @@ public class Stock implements Serializable {
 		this.vlinePercentage = vlinePercentage;
 	}
 
-	private ValueLine valueLine;
+
+
 	
 
 		
@@ -43,7 +95,6 @@ public class Stock implements Serializable {
 
 	public Stock  setStkName(String stkName) {
 		this.stkName = stkName;
-
 		return this;
 	}
 

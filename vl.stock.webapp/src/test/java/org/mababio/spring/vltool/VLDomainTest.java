@@ -3,6 +3,8 @@
  */
 package org.mababio.spring.vltool;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.LinkedHashSet;
 import java.util.List;
 
@@ -27,36 +29,72 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @WebAppConfiguration
 public class VLDomainTest extends TestCase {
 	
-	static final String LOG_PROPERTIES_FILE = "../ValueLineHibernate/properties/log4j.properties";
+//	static final String LOG_PROPERTIES_FILE = "../ValueLineHibernate/properties/log4j.properties";
 	
 	
-	private static Logger iLOG = Logger.getLogger(VLDomainTest.class);
+//	private static Logger iLOG = Logger.getLogger(VLDomainTest.class);
 	
-	
+/*
+
 	@Autowired
 	private StockRepo service;
-	
+*/
+
 	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+/*
 		PropertyConfigurator.configure(LOG_PROPERTIES_FILE);
 		iLOG.setLevel(Level.DEBUG);
 		iLOG.info(" SetUP--  ");
+*/
 		System.out.println("<<<<Junit setUp ");
 		System.out.println(System.getProperty("java.class.path"));
 	}
-	
-	
-	
+
+/*
+	@Test
+	public void writeToFile(){
+
+		PrintWriter out = null;
+		try {
+			out = new PrintWriter("/home/ea/Desktop/oneTwo.txt");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		out.println("hello mike, it's working");
+
+		out.close();
+
+
+	}*/
+
+
 
 	@Test
-	public  void testLoadData(){	
-		
+	public void  TestOutputRaw()  {
+		String folder = "/home/ea/IdeaProjects/vl.stock.webapp/vl.stock.webapp/src/main/resources/VL/VLpdf";
+
+		StocksPdfExtractor stocksPdfExtractor = new StocksPdfExtractor(folder);
+		try {
+			stocksPdfExtractor.getStockFromPDF();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+/*
+
+	@Test
+	public  void testLoadData() throws FileNotFoundException {
+		String folder = "/home/ea/IdeaProjects/vl.stock.webapp/vl.stock.webapp/src/main/resources/VL/VLpdf";
 		service.deleteAll();
 		iLOG.info(" STARTED testLoadValueLine --  ");
-		StocksPdfExtractor pdfEx=new StocksPdfExtractor();
-		LinkedHashSet<Stock> vlStockSet=pdfEx.getPdfValueLines(); 
+		StocksPdfExtractor pdfEx=new StocksPdfExtractor(folder);
+		LinkedHashSet<Stock> vlStockSet=pdfEx.getStockFromPDF();
 		service.save(vlStockSet);
 	}
 
@@ -71,6 +109,7 @@ public class VLDomainTest extends TestCase {
 
 	}
 	
+*/
 
 	
 

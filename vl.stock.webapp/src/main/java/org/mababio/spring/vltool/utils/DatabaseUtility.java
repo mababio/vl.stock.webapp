@@ -291,7 +291,7 @@ public class DatabaseUtility
     if (connectString == null)  throw new IllegalArgumentException("Null connectString not allowed.");
 
     Class.forName(driverName).newInstance();
-    Connection conn = null;
+    Connection conn;
     
     if (dbUserID == null) conn = DriverManager.getConnection(connectString);
     else conn = DriverManager.getConnection(connectString, dbUserID, password);

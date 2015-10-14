@@ -16,4 +16,10 @@ public class StockWebAppApplicationTests {
 	public void contextLoads() {
 	}
 
+	@Test
+
+	public void testExtractor(){
+
+	}
+
 }

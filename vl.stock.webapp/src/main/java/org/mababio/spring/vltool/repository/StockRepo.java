@@ -10,4 +10,7 @@ public interface StockRepo extends MongoRepository<Stock, String> {
 
 
       List<Stock> findByStkName(String name);
+      List<Stock> findByTicker(String ticker);
+      List<Stock> findByVlinePriceBetween(Integer min, Integer max);
+
 }
