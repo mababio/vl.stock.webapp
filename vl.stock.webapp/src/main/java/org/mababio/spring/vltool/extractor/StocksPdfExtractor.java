@@ -1,5 +1,5 @@
 /**
- * author : Micahel Ababio
+ * author : Michael Ababio
  * Purpose: This class is the visible system that transforms pdf data into java objects
  * input: String representation of directory containing pdf
  * output: Java collection of Stock objects
@@ -21,6 +21,7 @@ import org.mababio.spring.vltool.domain.Stock;
 import org.mababio.spring.vltool.domain.ValueLine;
 import org.mababio.spring.vltool.utils.DateToken;
 import org.mababio.spring.vltool.utils.VLineUtils;
+
 import com.itextpdf.text.pdf.parser.PdfReaderContentParser;
 import com.itextpdf.text.pdf.parser.SimpleTextExtractionStrategy;
 import com.itextpdf.text.pdf.parser.TextExtractionStrategy;
@@ -30,8 +31,10 @@ import com.itextpdf.text.pdf.parser.TextExtractionStrategy;
 
 
 public class StocksPdfExtractor {
+	
+	
 	/*Field Deceleration */
-	private String  FOLDER;
+	private String  folder;
 	static final String LOG_PROPERTIES_FILE = "src/log4j/log4j.properties";
 	private static Logger iLOG = Logger.getLogger(StocksPdfExtractor.class);
 	/*Field Deceleration */
@@ -39,24 +42,24 @@ public class StocksPdfExtractor {
 
 
 	public StocksPdfExtractor(final String folder){
-		this.FOLDER = folder;
+		this.folder = folder;
 	}
 
 
-	public String getFOLDER() {
-		return FOLDER;
+	public String getFolder() {
+		return folder;
 	}
 
 
 	/*
 	* Purpose:Main method that coordinates subsystem to produce the objects from pdf
-	* inpput: nothing
+	* input: nothing
 	* output: collection of Stock object
 	* */
-	public Collection<Stock> getStockFromPDF() throws FileNotFoundException {
+	public Collection<Stock> getStockFromPDF() throws Exception {
 		LinkedHashSet<Stock> vlStockSet=new LinkedHashSet<>();
 		LinkedHashSet<String> filesSet=new LinkedHashSet<>();
-		File folder = new File(getFOLDER());
+		File folder = new File(getFolder());
 		filesSet = this.getPDFFilePath(folder,filesSet);
 		/*logging*/ System.out.println(" CONTENTS ["+filesSet.size()+"]");/*logging*/
 		 Iterator<String> itx=filesSet.iterator();
@@ -126,7 +129,7 @@ public class StocksPdfExtractor {
 		        if (fileEntry.isFile()) {
 		          temp = fileEntry.getName();
 		          if ((temp.substring(temp.lastIndexOf('.') + 1, temp.length()).toLowerCase()).equals("pdf")){
-		            /*logging*/System.out.println("File= " + InputFolder.getAbsolutePath()+ "\\" + fileEntry.getName());/*logging*/
+		            /*logging*/System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>File= " + InputFolder.getAbsolutePath()+ "\\" + fileEntry.getName());/*logging*/
 		            String fPath=InputFolder.getAbsolutePath()+ "\\" + fileEntry.getName();
 		            fPath=StringUtils.replace(fPath, "\\","/");
 		            pdfFiles.add(fPath);
@@ -143,7 +146,7 @@ public class StocksPdfExtractor {
 	/*for testing purposes*/
 	private  void dumpStringCollectionToFile(Collection dumpStrings) throws FileNotFoundException {
 
-		PrintWriter out = new PrintWriter("/home/ea/Desktop/fileDump.txt");
+		PrintWriter out = new PrintWriter("C:/Users/Workstation/Desktop/fileDump.txt");
 
 		dumpStrings.stream().forEach(dump -> out.println(dump.toString()));
 
@@ -151,7 +154,7 @@ public class StocksPdfExtractor {
 	}
 
 
-	private  Set<Stock> processValueLinePayLoad(LinkedHashMap<Integer,String> VLMap) throws FileNotFoundException {
+	private  Set<Stock> processValueLinePayLoad(LinkedHashMap<Integer,String> VLMap) throws Exception {
 		/*logging*/iLOG.debug(">>>>> processValueLinePayLoad Starting the Stock Load Process....");/*logging*/
 		
 		Set<Stock> stockSet = new HashSet<>();
@@ -173,10 +176,8 @@ public class StocksPdfExtractor {
 		for(String str : allStks){
 
 			String stckLine=str.trim();
-
 			if(Character.isDigit(stckLine.charAt(0))){
-				Stock stck=VLineUtils.getValueLineStock(stckLine,dtk);
-				stck.setValueLine(vaLine);
+				Stock stck=VLineUtils.getValueLineStock(stckLine,vaLine);
 				stockSet.add(stck);
 			}
 		}

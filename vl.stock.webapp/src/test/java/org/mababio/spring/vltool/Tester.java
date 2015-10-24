@@ -13,19 +13,23 @@ import java.util.regex.Pattern;
 public class Tester {
 
     public static void main(String[] args) {
-        String test = "1234 Arrowhead Research ARWR 7.99 185.4% 1 4 5";
+    	
+    	
+    
+    	
+       String test = "1234 Westmoreland Research ArWR 28.87 84.8% 4 3 5"; //3512 Westmoreland Coal CoWLB 28.87 84.8% 4 3 5
 
 
        String firstToken = "(\\d{4}\\s)";
-        String secondToken =  "(\\b[([A-Z]([a-z]+)\\s)]+\\b)";                              //"([[A-Z][a-z]+\\s]+)";
-        String thridToken = "([A-Z]{3,4}\\s)";
+        String secondToken =      "(\\b[(\\S\\s)]+\\b)"; 
+        String thridToken = "([A-Z a-z]{3,4}\\s)";
         String forthToken = "([0-9]+\\.[0-9]{2}\\s)";
-        String fifthToken = "([0-9]+\\.[0-9]%\\s)";
-        String sixthToken = "([0-9]\\s)";
-        String seventhToken = "([0-9]\\s)";
-        String eighthToken = "([0-9]\\b)";
+        String fifthToken = "(-?[0-9]+\\.[0-9]%\\s)";
+        String sixthToken = "([0-9]\\s|.*)";
+        String seventhToken = "([0-9]\\s|.*)";
+        String eighthToken = "([0-9]\\b|.*)";
 
-        Pattern pattern =   Pattern.compile(firstToken + secondToken+ thridToken+forthToken+fifthToken+sixthToken+seventhToken +eighthToken);/*+eighthToken);*/
+        Pattern pattern =   Pattern.compile(firstToken + secondToken+ thridToken+forthToken+fifthToken+sixthToken+seventhToken +eighthToken);
 
         Matcher matcher  = pattern.matcher(test);
 

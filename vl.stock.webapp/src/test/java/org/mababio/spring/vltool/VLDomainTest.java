@@ -74,7 +74,7 @@ public class VLDomainTest extends TestCase {
 
 
 	@Test
-	public void  TestOutputRaw()  {
+	public void  TestOutputRaw() throws Exception  {
 		String folder = "/home/ea/IdeaProjects/vl.stock.webapp/vl.stock.webapp/src/main/resources/VL/VLpdf";
 
 		StocksPdfExtractor stocksPdfExtractor = new StocksPdfExtractor(folder);

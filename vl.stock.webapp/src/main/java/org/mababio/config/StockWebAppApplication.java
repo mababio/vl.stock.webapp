@@ -3,7 +3,6 @@ package org.mababio.config;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
-import org.mababio.spring.vltool.repository.PersonRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -23,8 +22,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @ComponentScan(basePackages="org.mababio")
 public class StockWebAppApplication extends AbstractMongoConfiguration implements CommandLineRunner   {
 
-	@Autowired
-	PersonRepo repo;
+	
 
 
 	/*MongoDB settings*/
@@ -36,7 +34,7 @@ public class StockWebAppApplication extends AbstractMongoConfiguration implement
 
 	@Override
 	public Mongo mongo() throws Exception {
-		return new MongoClient("192.168.1.9");
+		return new MongoClient("localhost");
 	}
 
 
