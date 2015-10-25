@@ -16,9 +16,6 @@ public class DateToken {
 	private String thirdToken;
 	
 	
-	
-	
-	
 	/**
 	 * @return the firstToken
 	 */
